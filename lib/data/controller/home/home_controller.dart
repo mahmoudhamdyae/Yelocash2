@@ -74,7 +74,7 @@ class HomeController extends GetxController {
   double receiveAmount = 0.0;
   double amountSend = 0.0;
 
-  
+
 
   bool isNumeric(String str) {
     RegExp numeric = RegExp(r'^-?[0-9]+$');
@@ -311,22 +311,59 @@ class HomeController extends GetxController {
     update();
   }
 
-  void selectSellCurrency(int id) {
+  void selectSellCurrency(int id) async {
+
+
+    ResponseModel response = await currencyRepo.getSelected(id);
+
+    buyCurrencyList.clear();
+    tempbuyCurrencyList.clear();
+
+    if (response.statusCode == 200) {
+      BuyCurrencyModal model =
+      BuyCurrencyModal.fromJson(jsonDecode(response.responseJson));
+
+      if (model.status == MyStrings.success) {
+        List<BuyCurrency> currency = model.data?.currencies ?? [];
+        if (currency != null && currency.isNotEmpty) {
+          buyCurrencyList.addAll(currency);
+          tempbuyCurrencyList.addAll(currency);
+        } else {
+          // CustomSnackBar.error(
+          //     errorList:
+          //     model.message?.error ?? [MyStrings.somethingWentWrong]);
+        }
+      } else {
+        CustomSnackBar.error(
+            errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+      }
+    } else {
+      CustomSnackBar.error(errorList: [response.message]);
+    }
+    update();
+
+
+
+
+
+
+
+
     sendCurrencyID = id;
     selectedSendCurrency = tempsellCurrencyList.firstWhere((element) => element.id == id);
 
-    tempbuyCurrencyList.clear();
-
-    List<BuyCurrency> newBuyCurrency = [];
-    for (var element in buyCurrencyList) {
-      if (element.id.toString() != id.toString()) {
-        newBuyCurrency.add(element);
-      }
-    }
-
-    tempbuyCurrencyList.clear();
-    tempbuyCurrencyList.addAll(newBuyCurrency);
-
+    // tempbuyCurrencyList.clear();
+    //
+    // List<BuyCurrency> newBuyCurrency = [];
+    // for (var element in buyCurrencyList) {
+    //   if(element.id.toString() != id.toString()){
+    //     newBuyCurrency.add(element);
+    //   }
+    // }
+    //
+    // tempbuyCurrencyList.clear();
+    // tempbuyCurrencyList.addAll(newBuyCurrency);
+    //
     if (buyCurrencyID != null) {
       receiveAmountCount(double.tryParse(getingAmountController.text) ?? 0.0);
     }
@@ -334,21 +371,54 @@ class HomeController extends GetxController {
     update();
   }
 
-  void selectBuyCurrency(int id) {
-    buyCurrencyID = id;
-    selectedbuyCurrency = tempbuyCurrencyList.firstWhere((element) => element.id == id);
+  void selectBuyCurrency(int id) async {
 
+    ResponseModel response = await currencyRepo.getSelected2(id);
+
+    sellCurrencyList.clear();
     tempsellCurrencyList.clear();
 
-    List<SellCurrency> newSellCurrency = [];
-    for (var element in sellCurrencyList) {
-      if (element.id.toString() != id.toString()) {
-        newSellCurrency.add(element);
+    if (response.statusCode == 200) {
+      SellCurrencyModal model =
+      SellCurrencyModal.fromJson(jsonDecode(response.responseJson));
+
+      if (model.status == MyStrings.success) {
+        List<SellCurrency> currency = model.data?.currencies ?? [];
+        if (currency != null && currency.isNotEmpty) {
+          sellCurrencyList.addAll(currency);
+          tempsellCurrencyList.addAll(currency);
+        } else {
+          // CustomSnackBar.error(
+          //     errorList:
+          //     model.message?.error ?? [MyStrings.somethingWentWrong]);
+        }
+      } else {
+        CustomSnackBar.error(
+            errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
       }
+    } else {
+      CustomSnackBar.error(errorList: [response.message]);
     }
+    update();
 
-    tempsellCurrencyList.clear();
-    tempsellCurrencyList.addAll(newSellCurrency);
+
+
+
+    buyCurrencyID = id;
+    selectedbuyCurrency =
+        tempbuyCurrencyList.firstWhere((element) => element.id == id);
+
+    // tempsellCurrencyList.clear();
+    //
+    // List<SellCurrency> newSellCurrency = [];
+    // for (var element in sellCurrencyList) {
+    //   if(element.id.toString() != id.toString()){
+    //     newSellCurrency.add(element);
+    //   }
+    // }
+    //
+    // tempsellCurrencyList.clear();
+    // tempsellCurrencyList.addAll(newSellCurrency);
 
     if (sendCurrencyID != null && sendingAmountController.text.isNotEmpty) {
       sendAmountCount(double.parse(sendingAmountController.text));

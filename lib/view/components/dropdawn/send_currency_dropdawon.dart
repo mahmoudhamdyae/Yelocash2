@@ -3,6 +3,7 @@
 
 import 'package:changa_lab/core/utils/dimensions.dart';
 import 'package:changa_lab/core/utils/my_color.dart';
+import 'package:changa_lab/core/utils/my_strings.dart';
 import 'package:changa_lab/core/utils/style.dart';
 import 'package:changa_lab/data/controller/home/home_controller.dart';
 import 'package:changa_lab/data/model/currency/sell_currency_modal.dart';
@@ -14,11 +15,13 @@ import 'package:get/get.dart';
 class SendCurrencyDropDawon extends StatefulWidget {
   bool isBorder;
   Color bgColor;
+  final Function(SellCurrency) onSell;
 
   SendCurrencyDropDawon({
     super.key,
     this.isBorder = true,
     this.bgColor = MyColor.white,
+    required this.onSell,
   });
 
   @override
@@ -37,11 +40,11 @@ class _SendCurrencyDropDawonState extends State<SendCurrencyDropDawon> {
           color: MyColor.transparentColor,
           border: widget.isBorder
               ? Border.all(
-                  color: MyColor.borderColor,
-                  width: 1,
-                )
+            color: MyColor.borderColor,
+            width: 1,
+          )
               : const Border(),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(5),
         ),
         child: WillPopScope(
           onWillPop: () async {
@@ -61,14 +64,14 @@ class _SendCurrencyDropDawonState extends State<SendCurrencyDropDawon> {
                 label: "${value.name} - ${value.curSym}",
 
                 icon: Container(
-                  margin: const EdgeInsetsDirectional.only(start: Dimensions.space5),
+                    margin: const EdgeInsetsDirectional.only(start: Dimensions.space5),
                     height: 25,
                     width: 25,
                     child: CircleAvatar(
                         backgroundImage: NetworkImage(
                             '${controller.imagePath}/${value.image}')
-                      )
-                  ),
+                    )
+                ),
               );
             }).toList(),
             defaultItem: null,
@@ -78,33 +81,34 @@ class _SendCurrencyDropDawonState extends State<SendCurrencyDropDawon> {
               }
               CurrencyDropDawnController.close();
               controller.selectSellCurrency(value.id?.toInt() ?? 0);
+              widget.onSell(value);
             },
             onOpen: (value) {},
             resultOptions: ResultOptions(
-                openBoxDecoration: BoxDecoration(
-                  color: widget.bgColor,
-                  borderRadius: BorderRadius.circular(8),
+              openBoxDecoration: BoxDecoration(
+                color: widget.bgColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              width: MediaQuery.of(context).size.width,
+              icon: const SizedBox(
+                width: 10,
+                height: 10,
+                child: CustomPaint(
+                  painter: DropdownArrowPainter(),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                width: MediaQuery.of(context).size.width,
-                icon: const SizedBox(
-                  width: 10,
-                  height: 10,
-                  child: CustomPaint(
-                    painter: DropdownArrowPainter(),
-                  ),
-                ),
-                textOverflow: TextOverflow.ellipsis,
-                render: ResultRender.all,
-                alignment: Alignment.center,
-                placeholderTextStyle: bodyText,
-                placeholder: 'Select One',
-                isMarquee: true,
-                boxDecoration: const BoxDecoration(
-                  color: MyColor.white,
-                  borderRadius: BorderRadius.zero,
-                  ),
-                ),
+              ),
+              textOverflow: TextOverflow.ellipsis,
+              render: ResultRender.all,
+              alignment: Alignment.center,
+              placeholderTextStyle: bodyText,
+              placeholder: MyStrings.selectOne.tr,
+              isMarquee: true,
+              boxDecoration: const BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.zero,
+              ),
+            ),
             dropdownOptions: DropdownOptions(
               borderRadius: BorderRadius.zero,
               top: 10,

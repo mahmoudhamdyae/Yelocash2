@@ -10,14 +10,18 @@ import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:cool_dropdown/models/cool_dropdown_item.dart';
 import 'package:get/get.dart';
 
+import '../../../core/utils/my_strings.dart';
+
 class BuyCurrencyDropdawon extends StatefulWidget {
   bool isBorder;
   Color bgColor;
+  final Function(BuyCurrency) onBuy;
 
   BuyCurrencyDropdawon({
     super.key,
     this.isBorder = true,
     this.bgColor = MyColor.white,
+    required this.onBuy,
   });
 
   @override
@@ -33,14 +37,13 @@ class _BuyCurrencyDropdawonState extends State<BuyCurrencyDropdawon> {
       return Container(
         padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          color: MyColor.transparentColor,
           border: widget.isBorder
               ? Border.all(
-                  color: MyColor.borderColor,
-                  width: 1,
-                )
+            color: MyColor.borderColor,
+            width: 1,
+          )
               : const Border(),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(5),
         ),
         child: WillPopScope(
           onWillPop: () async {
@@ -59,14 +62,14 @@ class _BuyCurrencyDropdawonState extends State<BuyCurrencyDropdawon> {
                 value: value,
                 label: "${value.name} ${value.curSym}",
                 icon: SizedBox(
-                    height: 25,
-                    width: 25,
-                    child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            '${controller.imagePath}/${value.image}'
-                            )
-                        ),
+                  height: 25,
+                  width: 25,
+                  child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          '${controller.imagePath}/${value.image}'
+                      )
                   ),
+                ),
               );
             }).toList(),
             defaultItem: null,
@@ -76,6 +79,7 @@ class _BuyCurrencyDropdawonState extends State<BuyCurrencyDropdawon> {
               }
               CurrencyDropDawnController.close();
               controller.selectBuyCurrency(value.id?.toInt() ?? 0);
+              widget.onBuy(value);
             },
             onOpen: (value) {},
             resultOptions: ResultOptions(
@@ -96,7 +100,7 @@ class _BuyCurrencyDropdawonState extends State<BuyCurrencyDropdawon> {
                 render: ResultRender.all,
                 alignment: Alignment.center,
                 placeholderTextStyle: bodyText,
-                placeholder: 'Select One',
+                placeholder: MyStrings.selectOne.tr,
                 isMarquee: true,
                 boxDecoration: const BoxDecoration(
                   color: MyColor.white,
@@ -108,7 +112,7 @@ class _BuyCurrencyDropdawonState extends State<BuyCurrencyDropdawon> {
               height: MediaQuery.of(context).size.height / 2,
               gap: const DropdownGap.all(2),
               borderSide:
-                  const BorderSide(width: 1, color: MyColor.borderColor),
+              const BorderSide(width: 1, color: MyColor.borderColor),
               padding: const EdgeInsets.all(10),
               align: DropdownAlign.left,
               animationType: DropdownAnimationType.scale,
@@ -129,12 +133,12 @@ class _BuyCurrencyDropdawonState extends State<BuyCurrencyDropdawon> {
                   )),
               selectedTextStyle: appHeading,
               selectedBoxDecoration: BoxDecoration(
-                  border: Border.all(
-                    color: MyColor.borderColor,
-                    width: 1,
-                  ),
-                  color: MyColor.primary,
+                border: Border.all(
+                  color: MyColor.borderColor,
+                  width: 1,
                 ),
+                color: MyColor.primary,
+              ),
               isMarquee: true,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               render: DropdownItemRender.all,

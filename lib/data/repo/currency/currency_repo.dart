@@ -40,4 +40,26 @@ class CurrencyRepo {
     );
     return response;
   }
+
+  Future<dynamic> getSelected(int id) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.currencyUrl}${UrlContainer.getSelected}/$id';
+    ResponseModel response = await apiClient.request(
+      url,
+      Method.getMethod,
+      null,
+      passHeader: true,
+    );
+    return response;
+  }
+
+  Future<dynamic> getSelected2(int id) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.currencyUrl}${UrlContainer.getSelected2}/$id';
+    ResponseModel response = await apiClient.request(
+      url,
+      Method.getMethod,
+      null,
+      passHeader: true,
+    );
+    return response;
+  }
 }

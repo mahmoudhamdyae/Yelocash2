@@ -1,5 +1,3 @@
-import 'package:changa_lab/core/route/route.dart';
-import 'package:changa_lab/core/utils/my_color.dart';
 import 'package:changa_lab/core/utils/my_images.dart';
 import 'package:changa_lab/core/utils/util.dart';
 import 'package:changa_lab/data/controller/localization/localization_controller.dart';
@@ -17,18 +15,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   @override
   void initState() {
     MyUtils.splashScreen();
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GeneralSettingRepo(apiClient: Get.find()));
     Get.put(LocalizationController(sharedPreferences: Get.find()));
-    final controller = Get.put(SplashController(repo: Get.find(), localizationController: Get.find()));
+    final controller = Get.put(
+        SplashController(repo: Get.find(), localizationController: Get.find()));
 
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-       controller.gotoNextPage();
+      controller.gotoNextPage();
     });
   }
 
@@ -41,12 +41,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColor.primaryColor,
+      backgroundColor: const Color(0xff1E2329),
       body: Stack(
         children: [
           Align(
             alignment: Alignment.center,
-            child: Image.asset(MyImages.appLogoCircle, height: 100, width: 100),
+            child: Image.asset(MyImages.appLogoCircle2, height: 100, width: 100),
           ),
         ],
       ),

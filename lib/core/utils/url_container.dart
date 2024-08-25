@@ -1,5 +1,5 @@
 class UrlContainer {
-  static const String domainUrl = 'https://script.viserlab.com/changalab/demo';
+  static const String domainUrl = 'https://yelocash.net';
   static const String baseUrl   = '$domainUrl/api/';
 
   static const String dashBoardEndPoint   = 'dashboard';
@@ -61,6 +61,8 @@ class UrlContainer {
   static const String currencyUrl  = 'currency/list';
   static const String currencySell = '/sell';
   static const String currencyBuy  = '/buy';
+  static const String getSelected = '/buy_filter';
+  static const String getSelected2 = '/sell_filter';
     // exchanges
   static const String exchangeUrl     = 'exchange';
   static const String create          = 'exchange/create';

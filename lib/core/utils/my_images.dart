@@ -96,4 +96,13 @@ class MyImages {
   static const String withdrawHistory = "assets/images/withdraw_history.png";
   static const String profileImage    = "assets/images/avatar.png";
   static const String demo            = "http://192.168.30.113:8080/changalab/v2_1/files/assets/images/currency/63d797ac989e11675073452.jpg";
+  static const String c1 = "assets/images/c1.png";
+  static const String c2 = "assets/images/c2.png";
+  static const String v3 = "assets/images/v3.png";
+  static const String v2 = "assets/images/v2.png";
+  static const String v1 = "assets/images/v1.png";
+  static const String placeholder = "assets/images/placeholder.png";
+  static const String s = "assets/images/s.png";
+  static const String arrows = "assets/images/arrows.png";
+  static const String appLogoCircle2 = "assets/images/app_logo_circle2.png";
 }
