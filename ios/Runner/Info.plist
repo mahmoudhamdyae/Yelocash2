@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>dev.vlab.changalab</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -29,6 +29,7 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
+	<string></string>
 
 	<key>NSMicrophoneUsageDescription</key>
     <string>This application requires access to microphone.</string>
@@ -36,11 +37,11 @@
     <key>NSCameraUsageDescription</key>
     <string>This application requires access to camera.</string>
 
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+<!--	<array>-->
+<!--		<string>UIInterfaceOrientationPortrait</string>-->
+<!--		<string>UIInterfaceOrientationLandscapeLeft</string>-->
+<!--		<string>UIInterfaceOrientationLandscapeRight</string>-->
+<!--	</array>-->
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
