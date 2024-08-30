@@ -29,7 +29,7 @@ class SendCurrencyDropDawon extends StatefulWidget {
 }
 
 class _SendCurrencyDropDawonState extends State<SendCurrencyDropDawon> {
-  final CurrencyDropDawnController = DropdownController();
+  DropdownController<SellCurrency> currencyDropDawnController = DropdownController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +48,8 @@ class _SendCurrencyDropDawonState extends State<SendCurrencyDropDawon> {
         ),
         child: WillPopScope(
           onWillPop: () async {
-            if (CurrencyDropDawnController.isOpen) {
-              CurrencyDropDawnController.close();
+            if (currencyDropDawnController.isOpen) {
+              currencyDropDawnController.close();
               return Future.value(false);
             } else {
               return Future.value(true);
@@ -57,7 +57,7 @@ class _SendCurrencyDropDawonState extends State<SendCurrencyDropDawon> {
           },
           child: CoolDropdown<SellCurrency>(
             isMarquee: true,
-            controller: CurrencyDropDawnController,
+            controller: currencyDropDawnController,
             dropdownList: controller.tempsellCurrencyList.map((SellCurrency value) {
               return CoolDropdownItem<SellCurrency>(
                 value: value,
@@ -76,10 +76,10 @@ class _SendCurrencyDropDawonState extends State<SendCurrencyDropDawon> {
             }).toList(),
             defaultItem: null,
             onChange: (value) async {
-              if (CurrencyDropDawnController.isError) {
-                await CurrencyDropDawnController.resetError();
+              if (currencyDropDawnController.isError) {
+                await currencyDropDawnController.resetError();
               }
-              CurrencyDropDawnController.close();
+              currencyDropDawnController.close();
               controller.selectSellCurrency(value.id?.toInt() ?? 0);
               widget.onSell(value);
             },

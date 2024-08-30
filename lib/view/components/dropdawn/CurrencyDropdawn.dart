@@ -27,7 +27,7 @@ class CurrencyDropDawn extends StatefulWidget {
 }
 
 class _CurrencyDropDawnState extends State<CurrencyDropDawn> {
-  final CurrencyDropDawnController = DropdownController();
+  DropdownController<Currency> currencyDropDawnController = DropdownController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +46,8 @@ class _CurrencyDropDawnState extends State<CurrencyDropDawn> {
         ),
         child: WillPopScope(
           onWillPop: () async {
-            if (CurrencyDropDawnController.isOpen) {
-              CurrencyDropDawnController.close();
+            if (currencyDropDawnController.isOpen) {
+              currencyDropDawnController.close();
               return Future.value(false);
             } else {
               return Future.value(true);
@@ -55,7 +55,7 @@ class _CurrencyDropDawnState extends State<CurrencyDropDawn> {
           },
           child: CoolDropdown<Currency>(
             isMarquee: true,
-            controller: CurrencyDropDawnController,
+            controller: currencyDropDawnController,
             dropdownList: controller.sellCurrencyList.map((Currency value) {
               return CoolDropdownItem<Currency>(
                 value: value,
@@ -65,10 +65,10 @@ class _CurrencyDropDawnState extends State<CurrencyDropDawn> {
             }).toList(),
             defaultItem: null,
             onChange: (value) async {
-              if (CurrencyDropDawnController.isError) {
-                await CurrencyDropDawnController.resetError();
+              if (currencyDropDawnController.isError) {
+                await currencyDropDawnController.resetError();
               }
-              CurrencyDropDawnController.close();
+              currencyDropDawnController.close();
               //
               controller.selectWithdrawCurrency(value);
               controller.countConversion();
