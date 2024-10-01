@@ -1,4 +1,8 @@
+import 'package:changa_lab/core/utils/my_images.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:changa_lab/core/utils/my_color.dart';
 
@@ -14,6 +18,7 @@ class RoundedButton extends StatelessWidget {
   final double cornerRadius;
   final bool isOutlined;
   final Widget? child;
+  final Widget?logo;
 
   const RoundedButton({
     Key? key,
@@ -28,6 +33,7 @@ class RoundedButton extends StatelessWidget {
     this.verticalPadding = 15,
     this.color = MyColor.primaryColor,
     this.textColor = MyColor.colorWhite,
+    this.logo
   }) : super(key: key);
 
   @override
@@ -45,13 +51,22 @@ class RoundedButton extends StatelessWidget {
                 color: isColorChange ? color : MyColor.getPrimaryButtonColor(),
               ),
               child: Center(
-                child: Text(
-                  text.tr,
-                  style: TextStyle(
-                    color: isColorChange ? textColor : MyColor.getPrimaryButtonTextColor(),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (logo != null) ...[
+                      logo!, // Add logo only if it's not null
+                      const SizedBox(width: 4), // Add spacing if logo is present
+                    ],                    SizedBox(width: 4,),
+                    Text(
+                      text.tr,
+                      style: TextStyle(
+                        color: isColorChange ? textColor : MyColor.getSecondaryButtonTextColor(),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -65,15 +80,22 @@ class RoundedButton extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
                       width: size.width * width,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(cornerRadius), color: isColorChange ? color : MyColor.getPrimaryButtonColor()),
-                      child: Center(
-                        child: Text(
-                          text.tr,
-                          style: TextStyle(
-                            color: isColorChange ? textColor : MyColor.getPrimaryButtonTextColor(),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (logo != null) ...[
+                            logo!, // Add logo only if it's not null
+                            const SizedBox(width: 4), // Add spacing if logo is present
+                          ],SizedBox(width: 4,),
+                          Text(
+                            text.tr,
+                            style: TextStyle(
+                              color: isColorChange ? textColor : MyColor.getSecondaryButtonTextColor(),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
+                        ],
                       )),
                 ),
               )

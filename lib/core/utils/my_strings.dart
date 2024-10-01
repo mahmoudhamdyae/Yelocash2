@@ -20,7 +20,6 @@ class MyStrings {
   static const String getAmount             = "Get Amount";
   static const String referralCode          = 'Referral Code (optional)';
   static const String referralLinkCopied    = "Copied Referral Link";
-
   static const String limit         = "Limit";
   static const String skip          = "Skip";
   static const String upload        = "Upload";

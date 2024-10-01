@@ -5,7 +5,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
+  sdk: ">=3.4.3 <4.0.0"
 
 dependencies:
   flutter:
@@ -61,6 +61,7 @@ flutter:
     - assets/images/social/
     - assets/svg/
     - assets/animation/
+    - assets/images/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

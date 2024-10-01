@@ -216,6 +216,7 @@ class _HomeFormState extends State<HomeForm> {
                   return controller.submitLoading
                       ? const RoundedLoadingBtn()
                       : RoundedButton(
+                    logo: Image.asset("assets/images/icons/Asset 1 5.png"),
                     text: MyStrings.exchangeNow.tr,
                     press: () {
                       controller.createExchange();

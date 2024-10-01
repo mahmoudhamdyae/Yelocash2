@@ -33,6 +33,8 @@ class MyImages {
   static const String copy      = "assets/svg/copy.svg";
   static const String setting   = "assets/svg/setting.svg";
   static const String search    = "assets/svg/search.svg";
+  static const String logo="Asset 1 5.svg";
+
   // menu items
 
   static const String help          = "assets/svg/help.svg";
